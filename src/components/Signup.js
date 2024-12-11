@@ -39,7 +39,7 @@ const Signup = () => {
         const sendData = { name, email, password };
 
         try {
-            const url = 'http://localhost:8080/auth/signup';
+            const url = 'https://college-duniya.onrender.com/auth/signup';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -81,19 +81,25 @@ const Signup = () => {
     };
     return (
         <>
-            <div className="login-form">
+            <div className="login-form w-50">
                 <form onSubmit={formSubmit}>
                     <div className="avatar"></div>
                     <h4 className="modal-title">Sign up</h4>
                     <div className="form-group">
+                        <label htmlFor="name">Name*</label>
                         <input type="text" className="form-control" placeholder="Enter Name.." name='name' value={signupInfo.name} onChange={handleChange} />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="email">Email*</label>
                         <input type="text" className="form-control" placeholder="Enter Email.." name='email' value={signupInfo.email} onChange={handleChange} />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="password">Password*</label>
                         <input type="password" className="form-control" placeholder="Enter Password.." name='password' value={signupInfo.password} onChange={handleChange} />
-                    </div><div className="form-group">
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirm_password">Confirm Password*</label>
+
                         <input type="password" className="form-control" placeholder="Enter Confirm Password.." name='confirm_password' value={signupInfo.confirm_password} onChange={handleChange} />
                     </div>
 

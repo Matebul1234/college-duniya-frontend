@@ -30,7 +30,7 @@ const Login = () => {
         }
 
         try {
-            const url = 'http://localhost:8080/auth/login';
+            const url = 'https://college-duniya.onrender.com/auth/login';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -66,10 +66,11 @@ const Login = () => {
                     <div className="avatar"></div>
                     <h4 className="modal-title">Login</h4>
                     <div className="form-group">
-                        <label htmlFor="name">Email</label>
+                        <label htmlFor="name">Email*</label>
                         <input type="text" className="form-control" placeholder="Enter Email.." name='email' value={loginInfo.email} onChange={handleChange} />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="password">Password*</label>
                         <input type="password" className="form-control" placeholder="Enter Password.." name='password' value={loginInfo.password} onChange={handleChange} />
                     </div>
 

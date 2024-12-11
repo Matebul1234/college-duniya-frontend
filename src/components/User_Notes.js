@@ -6,7 +6,7 @@ import '../assets/login.css';
 
 const User_Notes = () => {
     // const api = process.env.REACT_APP_API_URL;
-    const api = "http://localhost:8080";
+    const api = "https://college-duniya.onrender.com";
     const [loginuser, setLoignUser] = useState();
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
@@ -28,6 +28,16 @@ const User_Notes = () => {
         }));
     };
 
+    const addnoteopen = (e) => {
+        e.preventDefault();
+        setNotesInfo({
+            title: '',
+            content: '',
+            category: ''
+        })
+        setVisible(true);
+    }
+
 
     const formSubmit = async (e) => {
         e.preventDefault(); // Prevent page refresh
@@ -42,7 +52,7 @@ const User_Notes = () => {
 
         try {
             // const url = `${api}/notes/add-notes`;
-            const url = 'http://localhost:8080/notes/add-notes'
+            const url = 'https://college-duniya.onrender.com/notes/add-notes'
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -55,6 +65,7 @@ const User_Notes = () => {
             const { success, message, error } = result;
             if (success) {
                 toast.success("Note added successfully");
+                getAllNotes();
                 setVisible(false)
 
             } else if (error) {
@@ -73,11 +84,8 @@ const User_Notes = () => {
 
     // get all notes
     const getAllNotes = async (e) => {
-
-        const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
-
         try {
-            const url = "http://localhost:8080/notes/all-notes";
+            const url = "https://college-duniya.onrender.com/notes/all-notes";
 
             const response = await fetch(url, {
                 method: 'GET',
@@ -110,7 +118,7 @@ const User_Notes = () => {
     const deleteNote = async (id) => {
         if (!window.confirm("Are you sure you want to delete this note?")) return;
         try {
-            const response = await fetch(`http://localhost:8080/notes/delete-note/${id}`, {
+            const response = await fetch(`https://college-duniya.onrender.com/notes/delete-note/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -203,7 +211,7 @@ const User_Notes = () => {
                 </div>
             </nav>
             <div className="d-flex p-3">
-                <button className="btn btn-md bg-primary text-light" onClick={() => setVisible(true)}>Add Notes</button>
+                <button className="btn btn-md bg-primary text-light" onClick={addnoteopen}>Add Notes</button>
             </div>
             {/* dialog box for open add notes form  */}
 
@@ -212,9 +220,11 @@ const User_Notes = () => {
                     <div className="login-form w-100">
                         <form onSubmit={formSubmit} w-50>
                             <div className="form-group">
+                                <label htmlFor="title">Title*</label>
                                 <input type="text" className="form-control" placeholder="Enter Titel" name='title' value={notesInfo.title} onChange={handleChange} />
                             </div>
                             <div className="form-group">
+                                <label htmlFor="category">Category*</label>
                                 <select
                                     className="form-control"
                                     name="category"
@@ -229,6 +239,7 @@ const User_Notes = () => {
                             </div>
 
                             <div className="form-group">
+                                <label htmlFor="content">Content</label>
                                 <textarea type="text" className="form-control" placeholder="Enter content.. " name='content' value={notesInfo.content} onChange={handleChange} />
                             </div>
 
@@ -245,9 +256,11 @@ const User_Notes = () => {
                     <div className="login-form w-100">
                         <form onSubmit={editUserNotes} w-50>
                             <div className="form-group">
+                                <label htmlFor="titel">Title*</label>
                                 <input type="text" className="form-control" placeholder="Enter Titel" name='title' value={notesInfo.title} onChange={handleChange} />
                             </div>
                             <div className="form-group">
+                                <label htmlFor="caterory">Category*</label>
                                 <select
                                     className="form-control"
                                     name="category"
@@ -262,6 +275,7 @@ const User_Notes = () => {
                             </div>
 
                             <div className="form-group">
+                                <label htmlFor="content">Content</label>
                                 <textarea type="text" className="form-control" placeholder="Enter content.. " name='content' value={notesInfo.content} onChange={handleChange} />
                             </div>
 
